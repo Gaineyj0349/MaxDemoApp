@@ -15,13 +15,12 @@ import java.io.*;
 
 public class DBHelperShippedIn extends SQLiteOpenHelper {
     private Context mycontext;
-    private static final int version =1
-            ;
+    private static final int version = 6;
 
-  //  private String DB_PATH = mycontext.getApplicationContext().getPackageName() + "/databases/";
+
     private static String DB_NAME_IN = "_central_db.db";
     private static String DB_NAME_OUT = "_central_db_" + version +".db";//the extension may be .sqlite or .db
-    public SQLiteDatabase definitionDB;
+    public SQLiteDatabase exampleDB;
     private String DB_PATH = "";
 
 
@@ -80,7 +79,7 @@ public class DBHelperShippedIn extends SQLiteOpenHelper {
         String outfilename = DB_PATH + DB_NAME_OUT;
 
         //Open the empty db as the output stream
-        OutputStream myoutput = new FileOutputStream("/data/data/com.bitwis3.gaine.sharetome/databases/"+DB_NAME_OUT);
+        OutputStream myoutput = new FileOutputStream("/data/data/com.gainwise.maxdemo/databases/"+DB_NAME_OUT);
 
         // transfer byte to inputfile to outputfile
         byte[] buffer = new byte[1024];
@@ -99,14 +98,14 @@ public class DBHelperShippedIn extends SQLiteOpenHelper {
     public void opendatabase() throws SQLException {
         //Open the database
         String mypath = DB_PATH + DB_NAME_OUT;
-        definitionDB = SQLiteDatabase.openDatabase(mypath, null, SQLiteDatabase.OPEN_READWRITE);
+        exampleDB = SQLiteDatabase.openDatabase(mypath, null, SQLiteDatabase.OPEN_READWRITE);
 
     }
 
 
     public synchronized void close() {
-        if (definitionDB != null) {
-            definitionDB.close();
+        if (exampleDB != null) {
+            exampleDB.close();
         }
         super.close();
     }
